@@ -1,0 +1,145 @@
+.container-fluid
+{
+    font-family: "Tajawal";
+}
+
+.Category-Img-Title
+{
+    width:90%;
+    height:200px;
+    // background-color: red;
+    background-repeat: no-repeat;
+    background-size: 100% 100%; /* For WebKit*/
+   margin: auto;
+}
+
+.img-style
+{
+    width: fit-content;
+    height: max-content;
+    // border-radius: 20px;
+}
+
+.Category-Description
+{
+    font-size: 13px;
+    // text-align:right;
+    margin-top: 10px;
+    max-width: 90%;
+    margin: auto;
+    padding-top: 5px;
+    text-align:right;
+    //background-color: rgba($color: #ffffff, $alpha: 0.5);
+    height: 90px;
+    overflow-y: auto;
+    padding: 6px;
+    // word-spacing: 2px;
+}
+
+
+.delete-btn , .update-btn
+{
+    float: left;
+    width: 60px;
+    height: 30px;
+    font-size: 15px;
+    padding: 5px;
+    font-weight: 600;
+    // margin-left: 10px;
+    margin-top: 10px;
+    border-width: 0.1px;
+    border-radius: 0.25rem;
+    transition:  .68s ease-in-out;
+}
+.delete-btn
+{
+ background-color: transparent;
+ color: #de3e4d;
+ border-color: #de3e4d;
+ margin-left: 7px;
+}
+.update-btn
+{
+    background-color: transparent;
+    color: #54c327; 
+    border-color: #54c327; 
+}
+
+.delete-btn:hover
+{
+    background-color: #de3e4d;
+    box-shadow: inset 6.5em 0 0 0 #de3e4d;
+    color: white;
+}
+.update-btn:hover
+{
+    background-color: #54c327;
+    box-shadow: inset 6.5em 0 0 0 #54c327;
+    color: white;
+}
+.project-box
+{
+    padding-bottom: 10px;
+}
+
+.title-style{
+    font-size: medium;
+    padding: 0.44em 1.1em;
+    background-color: #eb2067 !important;
+    border-radius: 0.25rem;
+}
+
+.Card-Content
+{
+    margin: auto;
+}
+.Contain-Style
+{
+    margin-right: 18px;
+    margin-top: 19px;
+    margin-bottom: 4px;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 3px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey; 
+    border-radius: 50px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #f16696; 
+    border-radius: 50px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #f16696; 
+  }
+
+  .description-Style
+  {
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+
+  .add-btn{
+      background-color: #53bf26;
+      border-color: #53bf26;
+      border-radius: 2px;
+      transition:  .5s ease-in-out;
+      font-weight: 600;
+
+  }
+
+  .add-btn:hover{
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  }

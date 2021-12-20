@@ -1,0 +1,123 @@
+<app-breadcrumb [title]="'ادارة المذيعين'" >
+</app-breadcrumb>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 project-list">
+      <div class="card">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="form-group" style="margin-bottom: 0px;">
+              <label></label>
+              <select (change)="selectChangeHandlerinterviewer($event)" class="form-select form-control pt-0 pr-10"
+                   #CategoryID >
+                  <option value="n" selected> {{selectedInterviewerDefault}} </option>
+                  <option *ngFor="let obj of _InterviewerIDName" value="{{obj.ID}}">
+                      <h3 class="selected-value"> {{obj.Name}} </h3>
+                  </option>
+              </select>
+          </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="text-right" style="margin-top: 15px;margin-left: 15px;" >
+              <div class="form-group mb-0 mr-0"></div>
+              <a class="btn add-btn" 
+                 [routerLink]="['/project/createInterviewer']"> <i
+                data-feather="plus-square">
+               </i>إضافة مذيع
+               </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <div class="card" style="margin: 3px ;">
+        <div class="card-body">
+          <div class="tab-content" id="top-tabContent">
+            <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
+              <div class="row">
+                <div *ngFor="let item of InterviewerListFiltered" class="col-xl-4 col-lg-6 mb-4">
+                  <div class="project-box shadow">
+                    <span class="badge badge-primary badge-color shadow title-style">{{item.InterviewerName}}</span>
+                    <h6></h6>
+                    <div class="media Contain-Style mt-4" >
+                      <!-- <img class="img-20 mr-1 rounded-circle" src="assets/images/user/3.jpg" alt="" data-original-title="" title=""> -->
+                      <!-- <i class="fa fa-angle-left"></i> -->
+                      <i class="fas fa-layer-group mr-2 pt-1" style="color: darkgrey;"></i>
+                      <div class="media-body" >
+                        <p > <a href="{{item.WebsiteUrl}}">الموقع الرسمى</a></p>
+                      </div>
+                    </div>
+                    <div class="Category-Img-Title" 
+                      style="background-image: url({{Url}}{{item.InterviewerPicture}}); background-size: cover;
+                      height: 260px;">
+                    </div>
+                    <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                      <div class="col-12 description-Style" style=" padding-left: 0px;
+                                                                    padding-right: 0px;
+                                                                    margin-top: 10px;
+                                                                    margin-bottom: 15px;">
+                        <p class="Category-Description p-0"> {{item.InterviewerDescription}} </p>
+                      </div>
+                    </div>
+                    <div class="row details " style="margin-left: 0px;margin-right: 5px;  ">
+                      <!-- <div class="col-5"><span>ظهور التصنيف </span></div>
+                      <div class="col-5 " style="color:#eb2067" *ngIf="item.CategoryVisible; else elseBlock" > نعم</div> -->
+                      <!-- <ng-template #elseBlock>لا </ng-template> -->
+                      <!-- <div class="col-5" > <span>ترتيب التصنيف </span></div> -->
+                      <div class="col-5"> <span>فيس بوك </span></div>
+                      <div class="col-7" style="color:#eb2067"> <a style="color:#eb2067" href="{{item.FacebookUrl}}">فيس بوك </a></div>
+                      <div class="col-5"> <span>إنستجرام </span></div>
+                      <div class="col-7" style="color:#eb2067"><a style="color:#eb2067" href="{{item.InstgramUrl}}">إنستجرام</a> </div>
+                      <div class="col-5"> <span>تويتر </span></div>
+                      <div class="col-7" style="color:#eb2067"><a style="color:#eb2067" href="{{item.TwitterUrl}}">تويتر</a> </div>
+                      <div class="col-5"> <span>يوتيوب </span></div>
+                      <div class="col-7" style="color:#eb2067"><a style="color:#eb2067" href="{{item.YoutubeUrl}}">يوتيوب</a></div>
+                      <div class="col-5"> <span>لينكيد إن </span></div>
+                      <div class="col-7" style="color:#eb2067"><a style="color:#eb2067" href="{{item.LinkedInUrl}}">لينكيد إن</a></div>
+                      <div class="col-5"> <span>تيك توك </span></div>
+                      <div class="col-7" style="color:#eb2067"><a style="color:#eb2067" href="{{item.TiktokUrl}}">تيك توك</a> </div>
+                      <div class="col-5"> <span>تاريخ الميلاد </span></div>
+                      <div class="col-7" style="color:#eb2067">{{item.Date }}</div>
+                      <!-- <div class="col-5" > <span> مشاهدة التصنيف </span></div>
+                      <div class="col-7" style="color:#eb2067">{{item.CategoryViews}}</div> -->
+                    </div>
+                    <div class="row" style="margin-left: 0px;margin-right: 0px; margin-bottom: 10px;" >
+                      <div class="col-12">
+                        <button class="update-btn ml-2 "
+                        (click)="Updateinterviewer(
+                          item.InterviewerId         ,
+                          item.InterviewerName       ,
+                          item.InterviewerPicture    ,
+                          item.InterviewerCover      ,
+                          item.InterviewerDescription,
+                          item.FacebookUrl           ,
+                          item.InstgramUrl           ,
+                          item.TwitterUrl            ,
+                          item.YoutubeUrl            ,
+                          item.LinkedInUrl           ,
+                          item.WebsiteUrl            ,
+                          item.CreationDate          ,
+                          item.BirthDate             ,
+                          item.TiktokUrl             ,
+                          item.Date                  )">
+                          تعديل
+                        </button>
+                        <button class="delete-btn mr-2"
+                          (click)="openDialog(item.InterviewerName,item.InterviewerId)">
+                          حذف
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Container-fluid Ends-->

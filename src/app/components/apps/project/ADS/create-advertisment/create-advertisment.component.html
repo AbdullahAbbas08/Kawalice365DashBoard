@@ -1,0 +1,199 @@
+<app-breadcrumb [title]="'إضافة إعلان جديد '" [items]="['Apps', 'Project']" [active_item]="'Create New'">
+</app-breadcrumb>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <form class="form theme-form" [formGroup]="RegisterForm">
+
+                        <div class="row">
+                            <!-- Program Name -->
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="lbl-size"> عنوان الإعلان </label>
+                                    <input class="form-control" formControlName="AdTitle" type="text"
+                                        placeholder="أضف عنوان للإعلان *" #AdTitleRef [(ngModel)]="AdTitle">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <!--Season Name -->
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="lbl-size"> صاحب الإعلان </label>
+                                    <select (change)="selectChangeHandler($event)" class="form-select form-control pt-0 pr-10"
+                                        aria-label="Default select example" formControlName="ClientName" #ClientNameRef
+                                        placeholder="أختر صاحب الإعلان ">
+
+                                        <option value="" selected> {{DefaultSelectClient}} </option>
+                                        <option *ngFor="let obj of _ClientIDName" value="{{ obj.ID }}">
+                                            <h3 class="selected-value"> {{ obj.Name }} </h3>
+                                        </option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!--Season Name -->
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="lbl-size"> كود مكان الإعلان </label>
+                                    <select (change)="selectChangeHandler2($event)" class="form-select form-control pt-0 pr-10"
+                                        aria-label="Default select example" formControlName="PlaceHolderCode"
+                                        #PlaceHolderCodeRef placeholder="أختر كود مكان الإعلان ">
+                                        <option value="" selected> {{DefaultSelectPlacement}} </option>
+                                        <option *ngFor="let obj of _PlacementIDName" value="{{ obj.ID }}">
+                                            <h3 class="selected-value"> {{ obj.Name }} </h3>
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="row">
+                                <!-- Program Promo Url  -->
+                                <div class="col">
+                                    <div class="form-group">
+                                        <label class="lbl-size"> رابط الإعلان </label>
+                                        <input class="form-control" formControlName="URL" type="text"
+                                            placeholder="أضف رابط الإعلان*" #URLRef [(ngModel)]="URL">
+                                    </div>
+                                </div>
+                            </div>
+                          
+                        <div class="row">
+                            <div class="col-6">
+                                <label class="lbl-size">تاريخ بداية الإعلان </label>
+                                <input  type="text"
+                                        (change)="SetDates($event)" 
+                                        placeholder="{{Dates}}" 
+                                        formControlName="Dates"
+                                        class="form-control"
+                                        onfocus="(this.type='date')"
+                                        [(ngModel)]="Dates"  >
+                            </div>
+                            <div class="col-3">
+                                <label class="lbl-size"> تاريخ بداية الإعلان  ( بالساعة ) </label>
+                                <select (change)="selectChangeHandlerHour($event)" class="form-select form-control pt-0 pr-10  selectHeight "
+                                    formControlName="SelectHour" #TimeHourRef size="1">
+                                    <option  value="" selected> {{SelectHour}} </option>
+                                    <option *ngFor="let item of [].constructor(24); let i = index" value="{{i}}">
+                                        <h3 class="selected-value">{{i}} </h3>
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <label class="lbl-size"> تاريخ بداية الإعلان  ( بالدقيقة ) </label>
+                                <select (change)="selectChangeHandlerMinute($event)" class="form-select form-control pt-0 pr-10"
+                                    formControlName="SelectMinute" #TimeMinuteRef>
+                                    <option value="" selected> {{SelectMinute}} </option>
+                                    <option *ngFor="let item of [].constructor(60); let i = index" value="{{i}}">
+                                        <h3 class="selected-value">{{i}} </h3>
+                                    </option>
+                                </select>
+                            </div>
+                        </div> <br>
+
+                        <div class="row">
+                            <!-- <div class="col-6">
+                                <label>تاريخ نهاية الإعلان </label>
+                                <input type="date" 
+                                        placeholder="Datepicker" 
+                                        formControlName="PublishEndDate"
+                                        class="form-control" 
+                                        [(ngModel)]="PublishEndDate" >
+                            </div> -->
+                            <div class="col-6">
+                                <label class="lbl-size">تاريخ نهاية الإعلان </label>
+                                <input  type="text"
+                                        (change)="SetDated($event)" 
+                                        placeholder="{{Dated}}" 
+                                        formControlName="Dated"
+                                        class="form-control"
+                                        onfocus="(this.type='date')"
+                                        [(ngModel)]="Dated"  >
+                            </div>
+                            <div class="col-3">
+                                <label class="lbl-size"> تاريخ نهاية الإعلان ( بالساعة ) </label>
+                                <select (change)="selectChangeHandlerHourd($event)" class="form-select form-control pt-0 pr-10 "
+                                    formControlName="SelectHourd" #TimeHourRef>
+                                    <option value="" selected> {{SelectHourd}} </option>
+                                    <option *ngFor="let item of [].constructor(24); let i = index" value="{{i}}">
+                                        <h3 class="selected-value">{{i}} </h3>
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <label class="lbl-size"> تاريخ نهاية الإعلان ( بالدقيقة ) </label>
+                                <select (change)="selectChangeHandlerMinuted($event)" class="form-select form-control pt-0 pr-10"
+                                    formControlName="SelectMinuted" #TimeMinuteRef>
+                                    <option value="" selected> {{SelectMinuted}} </option>
+                                    <option *ngFor="let item of [].constructor(60); let i = index" value="{{i}}">
+                                        <h3 class="selected-value">{{i}} </h3>
+                                    </option>
+                                </select>
+                            </div>
+                        </div>       
+                        <br>
+                        <!-- Program Image  -->
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="lbl-size">صورة الإعلان </label>
+                                    <form class="dropzone digits" id="singleFileUpload" [formGroup]="RegisterForm">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="dz-message needsclick">
+                                                    <i class="icon-cloud-up"></i>
+                                                    <input type='file' formControlName="ImagePath" #file
+                                                        accept="image/*" id="getFile" style="display:none"
+                                                        (change)="preview(file.files)">
+
+                                                    <button class="btnFile-style"
+                                                        onclick="document.getElementById('getFile').click()">
+                                                        أختر صورة الإعلان
+                                                    </button>
+                                                    <!-- <h6> click to upload.</h6> -->
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <img [src]="imgURL" class="image-input-file" *ngIf="imgURL">
+                                            </div>
+                                            <div class="col-4">
+                                                <img [src]="ImagePath" class="image-input-file"
+                                                    *ngIf="!imgURL && ImagePath ">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actions Buttons  -->
+                        <div class="row">
+                            <div class="col d-flex justify-content-end ">
+                                <div class="form-group mb-0">
+                                    <button class="btn btn-success mr-3 Add-style" (click)="CreateADS()"
+                                        [disabled]="RegisterForm.invalid" [hidden]="FlagUpdate">
+                                        إضافة
+                                    </button>
+                                    <button class="btn btn-primary mr-3 Add-style" (click)="UpdateAds()"
+                                        [hidden]="!FlagUpdate">
+                                        تعديل
+                                    </button>
+                                    <a class="btn btn-danger" (click)="CancelOperation()">إلغاء</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+
+<!-- [disabled]="RegisterForm.invalid" -->

@@ -1,0 +1,73 @@
+<app-breadcrumb [title]="'إضافة أبعاد إعلان جديد'" [items]="['Apps', 'Project']" [active_item]="'Create New'"></app-breadcrumb>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+<div class="row">
+    <div class="col-sm-12">
+    <div class="card">
+        <div class="card-body">
+        <form class="form theme-form" [formGroup]="RegisterForm" >
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                    <label class="lbl-size">أبعاد الاعلان  </label>
+                    <input class="form-control"
+                        formControlName="ADTargetTitle"
+                        type="text" 
+                        placeholder="إضافة عنوان الأبعاد *" 
+                        #ADTargetTitleRef 
+                        [(ngModel)]="ADTargetTitle" > 
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                    <label class="lbl-size">نوع الإعلان</label>
+                    <input class="form-control"
+                        formControlName="ADTargetType"
+                        type="text" 
+                        placeholder="نوع الاعلان  *" 
+                        #ADTargetTypeRef 
+                        [(ngModel)]="ADTargetType" > 
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                    <label class="lbl-size">رقم المنتج</label>
+                    <input class="form-control"
+                        formControlName="ItemID"
+                        type="number" 
+                        placeholder="  أكتب رقم المنتج  *" 
+                        #ItemIDRef 
+                        [(ngModel)]="ItemID" > 
+                    </div>
+                </div>
+            </div>
+          
+            <div class="row">
+                <div class="col d-flex justify-content-end ">
+                    <div class="form-group mb-0">
+                    <button class="btn btn-success mr-3 Add-style" 
+                        (click)="InsertTarget()"
+                        [disabled]="RegisterForm.invalid"
+                        [hidden]="FlagUpdate" >
+                        إضافة
+                    </button>
+                    <button class="btn btn-primary mr-3 Add-style" 
+                        (click)="UpdateTarget()"
+                        [hidden]="!FlagUpdate" >
+                        تعديل
+                    </button>
+                    <a class="btn btn-danger" (click)="CancelOperation()" >إلغاء</a>
+                </div>
+            </div>
+            </div>
+
+        </form>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+<!-- Container-fluid Ends-->
+
+<!-- [disabled]="RegisterForm.invalid" -->

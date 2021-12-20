@@ -1,0 +1,57 @@
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { LoginComponent } from './auth/login/login.component';
+import { ContentComponent } from "./shared/components/layout/content/content.component";
+import { FullComponent } from "./shared/components/layout/full/full.component";
+import { full } from "./shared/routes/full.routes";
+import { content } from "./shared/routes/routes";
+
+import { AdminGuard } from './shared/guard/admin.guard';
+import { DefaultComponent } from './components/dashboard/default/default.component';
+import { CreateProjectComponent } from './components/apps/project/create-project/create-project.component';
+
+const routes: Routes = [
+  {
+    path: 'Update-Category',
+    component: CreateProjectComponent
+
+  },
+  {
+    path: '',
+     redirectTo: 'dashboard/default',
+    pathMatch: 'full'
+  },
+  {
+    path: 'auth/login',
+    component: LoginComponent
+  },
+  {
+    path: '',
+    component: ContentComponent,
+   // canActivate: [AdminGuard],
+    children: content
+  },
+  {
+    path: '',
+    component: FullComponent,
+    //canActivate: [AdminGuard],
+    children: full
+  },
+ 
+  {
+    path: '**',
+    redirectTo: ''
+  }
+];
+
+@NgModule({
+  imports: [[RouterModule.forRoot(routes, {
+    useHash:true,
+    anchorScrolling: 'enabled',
+    scrollPositionRestoration: 'enabled',
+    relativeLinkResolution: 'legacy'
+})],
+],
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }

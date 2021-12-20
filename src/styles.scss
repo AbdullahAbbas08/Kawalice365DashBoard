@@ -1,0 +1,34 @@
+/* You can add global styles to this file, and also import other style files */
+@import "./assets/scss/app.scss";
+
+@font-face {
+    font-family: "Tajawal";
+    src: local("Tajawal"), url(./assets/fonts/Tajawal/Tajawal-Regular.ttf) format("truetype");
+}
+
+.router-wrapper  {
+    position:  relative;
+    overflow:  hidden;
+    width:  100vw;
+    height:  calc(100%  -  47px);
+    perspective:  1200px;
+    transform-style:  preserve-3d;
+}
+
+:host  {
+    display: block;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #60d7a9;
+}
+html, body { height: 100%; }
+body {
+     margin: 0; 
+     font-family: Roboto, "Cairo", sans-serif; 
+    }
+
+    .HeightList
+    {
+        height: 45px;
+    }

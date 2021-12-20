@@ -1,0 +1,128 @@
+<app-breadcrumb [title]="'إضافة تصنيف جديد'" [items]="['Apps', 'Project']" [active_item]="'Create New'">
+</app-breadcrumb>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <form class="form theme-form" [formGroup]="RegisterForm">
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="lbl-size">عنوان التصنيف </label>
+                                    <input class="form-control" formControlName="CategoryTitle" type="text"
+                                        placeholder="إضافة عنوان التصنيف  *" #CategoryTitleRef id="CategoryTitleID"
+                                        [(ngModel)]="CategoryTitle">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="lbl-size">ترتيب التصنيف </label>
+                                    <input class="form-control" formControlName="CategoryOrder" type="number"
+                                        placeholder="ترتيب التصنيف " #CategoryOrderRef [(ngModel)]="CategoryOrder">
+                                </div>
+                            </div> 
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="lbl-size">إظهار التصنيف </label>
+                                    <div class="form-control" style="border-width: 0px;">
+                                        <label class="switch">
+                                            <input type="checkbox"  
+                                                   id="checkbox1" 
+                                                   (change)="selectChangeHandlerVisible($event)"
+                                                   checked >
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="lbl-size">وصف التصنيف </label>
+                                    <textarea class="form-control" formControlName="CategoryDescription"
+                                        id="exampleFormControlTextarea4" rows="3" #CategoryDescriptionRef
+                                        placeholder=" أكتب وصف التصنيف " [(ngModel)]="CategoryDescription" ></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <!-- <div class="form-group">
+                    <label>Category Description</label>
+                        <h3>
+                            <mat-form-field appearance="fill">
+                            <mat-label>Input disabled</mat-label>
+                            <input matInput [matDatepicker]="dp3" disabled>
+                            <mat-datepicker-toggle matSuffix [for]="dp3"></mat-datepicker-toggle>
+                            <mat-datepicker #dp3 disabled="false"></mat-datepicker>
+                            </mat-form-field>
+                        </h3>   
+                    </div> -->
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="lbl-size">صورة التصنيف </label>
+                                    <form class="dropzone digits" id="singleFileUpload" [formGroup]="RegisterForm">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="dz-message needsclick">
+                                                    <i class="icon-cloud-up"></i>
+                                                    <input type='file' formControlName="CategoryImage" #file
+                                                        accept="image/*" id="getFile" style="display:none"
+                                                        (change)="preview(file.files)">
+
+                                                    <button class="btnFile-style"
+                                                        onclick="document.getElementById('getFile').click()">
+                                                        أختر صورة التصنيف
+                                                    </button>
+                                                    <!-- <h6> click to upload.</h6> -->
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <img [src]="imgURL" class="image-input-file" *ngIf="imgURL">
+                                            </div>
+                                            <div class="col-4">
+                                                <img [src]="CategoryImg" class="image-input-file"
+                                                    *ngIf="!imgURL && CategoryImg">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                      
+
+                        <div class="row">
+                            <div class="col d-flex justify-content-end ">
+                                <div class="form-group mb-0 " >
+                                    <button class="btn btn-success mr-3 Add-style" (click)="InsertCategory()"
+                                        [disabled]="RegisterForm.invalid" [hidden]="FlagUpdate">
+                                        إضافة
+                                    </button>
+                                    <button class="btn btn-primary mr-3 Add-style" (click)="UpdateCategory()"
+                                        [hidden]="!FlagUpdate">
+                                        تعديل
+                                    </button>
+                                    <a class="btn btn-danger" (click)="CancelOperation()">إلغاء</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+
+<!-- [disabled]="RegisterForm.invalid" -->

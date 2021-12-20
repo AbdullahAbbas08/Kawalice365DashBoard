@@ -1,0 +1,142 @@
+<app-breadcrumb [title]="' إضافة  مكان إعلان جديد '" [items]="['Apps', 'Project']" [active_item]="'Create New'"></app-breadcrumb>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+<div class="row">
+    <div class="col-sm-12">
+    <div class="card">
+        <div class="card-body">
+        <form class="form theme-form" [formGroup]="RegisterForm" >
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                    <label class="lbl-size"> عنوان مكان إعلان </label>
+                    <input class="form-control"
+                        formControlName="Title"
+                        type="text" 
+                        placeholder="أضف عنوان مكان إعلان *" 
+                        #TitleRef 
+                        [(ngModel)]="Title" > 
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                    <label class="lbl-size"> كود مكان إعلان </label>
+                    <input class="form-control"
+                        formControlName="ADPlaceholderCode"
+                        type="number" 
+                        placeholder="أضف رقم مكان إعلان *" 
+                        #ADPlaceholderCodeRef 
+                        [(ngModel)]="ADPlaceholderCode" > 
+                    </div>
+                </div>
+            </div>   
+
+            <div class="row">
+                  <!--Season Name -->
+                  <div class="col-sm-6">
+                    <div class="form-group">
+                    <label class="lbl-size"> أبعاد مكان الاعلان</label>
+                    <select (change)="selectChangeHandlerStyle($event)"
+                            class="form-select form-control HeightList"
+                            aria-label="Default select example"
+                            formControlName="AdStyleID"
+                            #AdStyleIDRef >
+                            
+                            <option value="" selected > {{DefaultSelectStyle}} </option>
+                            <option *ngFor="let obj of _StyleIDName" value="{{ obj.ID }}">
+                                <h3 class="selected-value" > {{ obj.Name }} </h3> 
+                            </option>
+
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                    <label class="lbl-size"> تارجت الاعلان</label>
+                    <select (change)="selectChangeHandlerTarget($event)"
+                            class="form-select form-control HeightList"
+                            aria-label="Default select example"
+                            formControlName="AdTargetId"
+                            #AdStyleIDRef >
+                            
+                            <option value="" selected > {{DefaultSelectTarget}} </option>
+                            <option *ngFor="let obj of _TargetIDName" value="{{ obj.ID }}">
+                                <h3 class="selected-value" > {{ obj.Name }} </h3> 
+                            </option>
+
+                        </select>
+                    </div>
+                </div>
+
+               
+            </div>
+                            
+           
+            <div class="row">
+            <div class="col">
+                <div class="form-group">
+                <label class="lbl-size">غلاف مكان الاعلان </label>
+                <form class="dropzone digits" 
+                      id="singleFileUpload" 
+                      [formGroup]="RegisterForm">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="dz-message needsclick">
+                                <i class="icon-cloud-up"></i>
+                                <input type='file' 
+                                       formControlName ="ImagePath"
+                                       #file   
+                                       accept="image/*" 
+                                       id="getFile" 
+                                       style="display:none" 
+                                       (change)="preview(file.files)" >
+
+                                <button class="btnFile-style" 
+                                        onclick="document.getElementById('getFile').click()">
+                                        أختر  غلاف مكان الاعلان
+                                </button>
+                            <!-- <h6> click to upload.</h6> --> 
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <img [src]="imgURL" class="image-input-file"  *ngIf="imgURL">
+                        </div>
+                        <div class="col-4"  >
+                            <img [src]="ImagePath" class="image-input-file" *ngIf="!imgURL && ImagePath " >
+                        </div>
+                    </div>    
+                </form>
+                </div>
+            </div>
+            </div>
+
+            <!-- Actions Buttons  -->
+            <div class="row">
+                <div class="col d-flex justify-content-end ">
+                    <div class="form-group mb-0">
+                    <button class="btn btn-success mr-3 Add-style" 
+                        (click)="CreatePlacement()"
+                        [disabled]="RegisterForm.invalid"
+                        [hidden]="FlagUpdate" >
+                        إضافة
+                    </button>
+                    <button class="btn btn-primary mr-3 Add-style" 
+                        (click)="UpdatePlacement()"
+                        [hidden]="!FlagUpdate" >
+                        تعديل
+                    </button>
+                    <a class="btn btn-danger" (click)="CancelOperation()" >إلغاء</a>
+                </div>
+            </div>
+            </div>
+
+        </form>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+<!-- Container-fluid Ends-->
+
+<!-- [disabled]="RegisterForm.invalid" -->

@@ -1,0 +1,203 @@
+<app-breadcrumb [title]="'إضافة حلقة جديد'" [items]="['Apps', 'Project']" [active_item]="'Create New'"></app-breadcrumb>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <form class="form theme-form" [formGroup]="RegisterForm">
+
+                        <div class="row">
+                            <!-- Program Name -->
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="lbl-size"> أسم الحلقة </label>
+                                    <input class="form-control HeightList" formControlName="EpisodeTitle" type="text"
+                                        placeholder="أضف أسم الحلقة *" #EpisodeTitleRef [(ngModel)]="EpisodeTitle">
+                                </div>
+                            </div>
+
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label class="lbl-size"> إختر برنامج من القائمة</label>
+                                    <select (change)="selectChangeHandlerProgram($event)"
+                                            class="form-select form-control pt-0 pr-10" 
+                                            formControlName="ProgramID" 
+                                            #ProgramIDRef>
+                                                            <option value="" selected> {{DefaultSelectprogram}} </option>
+                                                            <option *ngFor="let obj of _ProgramIDName" value="{{ obj.ID }}">
+                                                                <h3 class="selected-value"> {{ obj.Name }} </h3>
+                                                            </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <!--Season Name -->
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="lbl-size">موسم الحلقة </label>
+                                    <select (change)="selectChangeHandlerSeason($event)"  
+                                            class="form-select form-control pt-0 pr-10"
+                                            formControlName="SeasonName" 
+                                            #SeasonnameRef >
+                                                            <option value="" selected> {{DefaultSelectSeason}} </option>
+                                                            <option *ngFor="let obj of _SeasonIDName" value="{{ obj.ID }}">
+                                                                <h3 class="selected-value"> {{ obj.Name }} </h3>
+                                                            </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                           
+
+                            <!-- Program Promo Url  -->
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="lbl-size"> رابط الحلقة </label>
+                                    <input class="form-control" formControlName="EpisodeUrl" type="text"
+                                        placeholder="أضف أسم الحلقة *" #EpisodeUrlRef [(ngModel)]="EpisodeUrl">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="lbl-size">إظهار الحلقة </label>
+                                    <select class="form-control digits pt-0 pr-10" #EpisodeVisibleRef
+                                        formControlName="EpisodeVisible">
+
+                                        <option value="true" selected>{{DefaultSelectVisible}}</option>
+                                        <option value="false"> لا </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div> -->
+
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label class="lbl-size">إظهارالحلقة </label>
+                                    <div class="form-control" style="border-width: 0px;">
+                                        <label class="switch">
+                                            <input type="checkbox"  
+                                                   id="checkbox1" 
+                                                   (change)="selectChangeHandlerVisible($event)"
+                                                   checked >
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                            
+                        <!-- Program Description  -->
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="lbl-size">وصف الحلقة</label>
+                                    <!-- <input type="text" class="form-control" formControlName="EpisodeDescription"
+                                        id="exampleFormControlTextarea4" rows="3" #EpisodeDescriptionRef
+                                        placeholder=" أكتب وصف الحلقة" [(ngModel)]="EpisodeDescription" /> -->
+                                        <textarea class="form-control" formControlName="EpisodeDescription"
+                                        id="exampleFormControlTextarea4" rows="3" #EpisodeDescriptionRef
+                                        placeholder=" أكتب وصف التصنيف " [(ngModel)]="EpisodeDescription" ></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <label class="lbl-size">تاريخ نشر الحلقة </label>
+                                <input  type="text" 
+                                (change)="SetDate($event)"
+                                placeholder="{{Date}}" 
+                                formControlName="EpisodePublishDate"
+                                class="form-control"
+                                onfocus="(this.type='date')"
+                                [(ngModel)]="Date" >
+                            </div>
+                            <div class="col-3">
+                                <label class="lbl-size"> وقت نشر الحلقة ( بالساعة ) </label>
+                                <select (change)="selectChangeHandlerHour($event)" class="form-select form-control pt-0 pr-10 "
+                                    formControlName="Hour" #TimeHourRef>
+                                    <option value="" selected> {{SelectHour}} </option>
+                                    <option *ngFor="let item of [].constructor(24); let i = index" value="{{i}}">
+                                        <h3 class="selected-value">{{i}} </h3>
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <label class="lbl-size"> وقت نشر الحلقة ( بالدقيقة ) </label>
+                                <select (change)="selectChangeHandlerMinute($event)" 
+                                        class="form-select form-control pt-0 pr-10"
+                                        formControlName="Minute" 
+                                        #TimeMinuteRef>
+                                    <option value="" selected> {{SelectMinute}} </option>
+                                    <option *ngFor="let item of [].constructor(60); let i = index" value="{{i}}">
+                                        <h3 class="selected-value">{{i}} </h3>
+                                    </option>
+                                </select>
+                            </div>
+                        </div><br>
+
+                        <!-- Program Image  -->
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="lbl-size">صورة الحلقة </label>
+                                    <form class="dropzone digits" id="singleFileUpload" [formGroup]="RegisterForm">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="dz-message needsclick">
+                                                    <i class="icon-cloud-up"></i>
+                                                    <input type='file' formControlName="EpisodeImg" #file
+                                                        accept="image/*" id="getFile" style="display:none"
+                                                        (change)="preview(file.files)">
+
+                                                    <button class="btnFile-style"
+                                                        onclick="document.getElementById('getFile').click()">
+                                                        أختر صورة ألحلقة
+                                                    </button>
+                                                    <!-- <h6> click to upload.</h6> -->
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <img [src]="imgURL" class="image-input-file" *ngIf="imgURL">
+                                            </div>
+                                            <div class="col-4">
+                                                <img [src]="EpisodeImg" class="image-input-file"
+                                                    *ngIf="!imgURL && EpisodeImg ">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actions Buttons  -->
+                        <div class="row">
+                            <div class="col d-flex justify-content-end ">
+                                <div class="form-group mb-0">
+                                    <button class="btn btn-success mr-3 Add-style" (click)="CreateEpisode()"
+                                        [disabled]="RegisterForm.invalid" [hidden]="FlagUpdate">
+                                        إضافة
+                                    </button>
+                                    <button class="btn btn-primary mr-3 Add-style" (click)="UpdateEpisode()"
+                                        [hidden]="!FlagUpdate">
+                                        تعديل
+                                    </button>
+                                    <a class="btn btn-danger" (click)="CancelOperation()">إلغاء</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+
+<!-- [disabled]="RegisterForm.invalid" -->

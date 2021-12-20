@@ -1,0 +1,9 @@
+<h1 mat-dialog-title style="text-align: center;font-size: 20px;font-weight: bold;">إنذار لحذف {{data.type}} </h1>
+<mat-dialog-content class="mat-typography">
+  <h2 style="font-weight: bold;text-align:right">سيتم حذف {{data.type}} ( {{data.name}} ) نهائيا من قائمة البيانات الموجودة </h2>
+  <h2 style="width:500px;color:red;text-align:right">هل تريد حذف ال{{data.type}} بالفعل ؟  </h2>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close="false" class="btn btn-primary" >إلغاء</button>&nbsp;&nbsp;
+  <button mat-button mat-dialog-close="true" cdkFocusInitial class="btn btn-danger" (click)="GeneralDelete(Flag)">تأكيد</button>
+</mat-dialog-actions>

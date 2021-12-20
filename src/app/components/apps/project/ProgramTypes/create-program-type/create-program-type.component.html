@@ -1,0 +1,99 @@
+<app-breadcrumb [title]="'إضافة نوع برنامج جديد'" [items]="['Apps', 'Project']" [active_item]="'Create New'"></app-breadcrumb>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+<div class="row">
+    <div class="col-sm-12">
+    <div class="card">
+        <div class="card-body">
+        <form class="form theme-form" [formGroup]="RegisterForm" >
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                    <label class="lbl-size">نوع البرنامج </label>
+                    <input class="form-control"
+                        formControlName="ProgramTypeTitle"
+                        type="text" 
+                        placeholder="إضافة نوع البرنامج  *" 
+                        #ProgramTypeTitleRef 
+                        [(ngModel)]="ProgramTypeTitle" > 
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                    <label class="lbl-size">ترتيب نوع البرنامج </label>
+                    <input class="form-control"
+                        formControlName="ProgramTypeOrder"
+                        type="number" 
+                        placeholder="إضافة ترتيب نوع البرنامج  *" 
+                        #ProgramTypeOrderRef 
+                        [(ngModel)]="ProgramTypeOrder" > 
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                    <label>صورة نوع البرنامج</label>
+                    <form class="dropzone digits" 
+                        id="singleFileUpload" 
+                        [formGroup]="RegisterForm">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="dz-message needsclick">
+                                    <i class="icon-cloud-up"></i>
+                                    <input type='file' 
+                                        formControlName ="ProgramTypeImg"
+                                        #file   
+                                        accept="image/*" 
+                                        id="getFile" 
+                                        style="display:none" 
+                                        (change)="preview(file.files)" >
+
+                                    <button class="btnFile-style" 
+                                            onclick="document.getElementById('getFile').click()">
+                                            أختر صورة نوع البرنامج
+                                    </button>
+                                <!-- <h6> click to upload.</h6> --> 
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <img [src]="imgURL" class="image-input-file"  *ngIf="imgURL">
+                            </div>
+                            <div class="col-4"  >
+                                <img [src]="ProgramTypeImg" class="image-input-file" *ngIf="!imgURL && ProgramTypeImg" >
+                            </div>
+                        </div>    
+                    </form>
+                    </div>
+                </div>
+            </div>
+          
+            <div class="row">
+                <div class="col d-flex justify-content-end ">
+                    <div class="form-group mb-0">
+                    <button class="btn btn-success mr-3 Add-style" 
+                        (click)="InsertProgramType()"
+                        [disabled]="RegisterForm.invalid"
+                        [hidden]="FlagUpdate" >
+                        إضافة
+                    </button>
+                    <button class="btn btn-primary mr-3 Add-style" 
+                        (click)="UpdateProgramType()"
+                        [hidden]="!FlagUpdate" >
+                        تعديل
+                    </button>
+                    <a class="btn btn-danger" (click)="CancelOperation()" >إلغاء</a>
+                </div>
+            </div>
+            </div>
+        </form>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+<!-- Container-fluid Ends-->
+
+<!-- [disabled]="RegisterForm.invalid" -->

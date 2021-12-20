@@ -1,0 +1,207 @@
+<app-breadcrumb [title]="'إضافة برنامج جديد'" [items]="['Apps', 'Project']" [active_item]="'Create New'">
+</app-breadcrumb>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <form class="form theme-form" [formGroup]="RegisterForm">
+
+                        <div class="row">
+                            <!-- Program Name -->
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="lbl-size"> أسم البرنامج </label>
+                                    <input class="form-control" formControlName="ProgramName" type="text"
+                                        placeholder="أضف أسم البرنامج  *" #CategoryTitleRef [(ngModel)]="ProgramName">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <!-- Category Name -->
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="lbl-size">أسم التصنيف</label>
+                                    <select (change)="selectChangeHandlerCategory($event)" class="form-select form-control pt-0 pr-10"
+                                        formControlName="CategoryName" #CategoryID>
+                                        <option value="" selected> {{DefaultSelectCategory}} </option>
+                                        <option *ngFor="let obj of _CategoryIDName" value="{{obj.ID}}">
+                                            <h3 class="selected-value"> {{obj.Name}} </h3>
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Interviewer Name -->
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="lbl-size">أسم مقدم البرنامج </label>
+                                    <select (change)="selectChangeHandlerInterviewer($event)" class="form-select form-control pt-0 pr-10"
+                                        formControlName="InterviewerName" #InterviewerID>
+                                        <option value="" selected> {{DefaultSelectInterviewer}} </option>
+                                        <option *ngFor="let obj of _InterviewerIDName" value="{{ obj.ID }}">
+                                            <h3 class="selected-value"> {{ obj.Name }} </h3>
+                                        </option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Program Type Name -->
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="lbl-size">نوع البرنامج </label>
+                                    <select (change)="selectChangeHandlerProgramType($event)" class="form-select form-control pt-0 pr-10"
+                                        aria-label="Default select example" formControlName="ProgramTypeName"
+                                        #ProgramTypeID placeholder="أختر نوع البرنامج من القائمة ">
+                                        <option value="" selected> {{DefaultSelectType}} </option>
+                                        <option *ngFor="let obj of _TypeIDName" value="{{ obj.ID }}">
+                                            <h3 class="selected-value"> {{ obj.Name }} </h3>
+                                        </option>
+
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Program Order -->
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label class="lbl-size">ترتيب البرنامج </label>
+                                    <input class="form-control" formControlName="ProgramOrder" type="number"
+                                        placeholder="ترتيب البرنامج  " #ProgramOrderRef [(ngModel)]="ProgramOrder">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <!-- Program Visible  -->
+                            <div class="form-group">
+                                <label class="lbl-size">إظهار البرنامج </label>
+                                <div class="form-control" style="border-width: 0px;">
+                                    <label class="switch">
+                                        <input type="checkbox"  
+                                               id="checkbox1" 
+                                               (change)="selectChangeHandlerVisible($event)"
+                                               checked >
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <!-- Program Promo Url  -->
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="lbl-size">رابط إعلان البرنامج </label>
+                                    <input class="form-control" formControlName="ProgramPromoUrl" type="text"
+                                        placeholder="أضف رابط إعلان البرنامج  *" [(ngModel)]="ProgramPromoUrl">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <label class="lbl-size">تاريخ بداية البرنامج </label>
+                                <input  type="text"
+                                        (change)="SetDate($event)" 
+                                        placeholder="{{Date}}" 
+                                        formControlName="Date"
+                                        class="form-control"
+                                        onfocus="(this.type='date')"
+                                        [(ngModel)]="Date"  >
+                            </div>
+                            <div class="col-3">
+                                <label class="lbl-size"> وقت بداية البرنامج ( بالساعة ) </label>
+                                <select (change)="selectChangeHandlerHour($event)" class="form-select form-control pt-0 pr-10 "
+                                    formControlName="SelectHour" #TimeHourRef>
+                                    <option value="" selected> {{SelectHour}} </option>
+                                    <option *ngFor="let item of [].constructor(24); let i = index" value="{{i}}">
+                                        <h3 class="selected-value">{{i}} </h3>
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <label class="lbl-size"> وقت بداية البرنامج ( بالدقيقة ) </label>
+                                <select (change)="selectChangeHandlerMinute($event)" class="form-select form-control pt-0 pr-10"
+                                    formControlName="SelectMinute" #TimeMinuteRef>
+                                    <option value="" selected> {{SelectMinute}} </option>
+                                    <option *ngFor="let item of [].constructor(60); let i = index" value="{{i}}">
+                                        <h3 class="selected-value">{{i}} </h3>
+                                    </option>
+                                </select>
+                            </div>
+                        </div><br>
+                        <!-- Program Description  -->
+                        <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label class="lbl-size">وصف التصنيف </label>
+                                    <textarea class="form-control" formControlName="ProgramDescription"
+                                    id="exampleFormControlTextarea4" rows="3" #ProgramDescriptionRef
+                                    placeholder=" أكتب وصف التصنيف " [(ngModel)]="ProgramDescription" ></textarea>
+                            </div>
+                        </div>
+                    </div> <br>
+
+                        <!-- Program Image  -->
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="lbl-size">صورة التصنيف </label>
+                                    <form class="dropzone digits" id="singleFileUpload" [formGroup]="RegisterForm">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="dz-message needsclick">
+                                                    <i class="icon-cloud-up"></i>
+                                                    <input type='file' formControlName="CategoryImage" #file
+                                                        accept="image/*" id="getFile" style="display:none"
+                                                        (change)="preview(file.files)">
+
+                                                    <button class="btnFile-style"
+                                                        onclick="document.getElementById('getFile').click()">
+                                                        أختر صورة ألبرنامج
+                                                    </button>
+                                                    <!-- <h6> click to upload.</h6> -->
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <img [src]="imgURL" class="image-input-file" *ngIf="imgURL">
+                                            </div>
+                                            <div class="col-4">
+                                                <img [src]="ProgramImg" class="image-input-file"
+                                                    *ngIf="!imgURL && ProgramImg ">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actions Buttons  -->
+                        <div class="row">
+                            <div class="col d-flex justify-content-end ">
+                                <div class="form-group mb-0">
+                                    <button class="btn btn-success mr-3 Add-style" (click)="InsertProgram()"
+                                        [disabled]="RegisterForm.invalid" [hidden]="FlagUpdate">
+                                        إضافة
+                                    </button>
+                                    <button class="btn btn-primary mr-3 Add-style" (click)="UpdateProgram()"
+                                        [hidden]="!FlagUpdate">
+                                        تعديل
+                                    </button>
+                                    <a class="btn btn-danger" (click)="CancelOperation()">إلغاء</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+
+<!-- [disabled]="RegisterForm.invalid" -->

@@ -1,0 +1,121 @@
+<app-breadcrumb [title]="'ادارة البرامج'">
+</app-breadcrumb>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12 project-list">
+      <div class="card">
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="form-group" style="margin-bottom: 0px;">
+              <label></label>
+              <select (change)="selectChangeHandler($event)" class="form-select form-control pt-0 pr-10" #CategoryID>
+                <option value="n" selected> {{DefaultSelectCategory}} </option>
+                <option *ngFor="let obj of _CategoryIDName" value="{{obj.ID}}">
+                  <h3 class="selected-value"> {{obj.Name}} </h3>
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="form-group" style="margin-bottom: 0px;">
+              <label></label>
+              <select (change)="selectChangeHandlerCategory($event)" class="form-select form-control pt-0 pr-10" [disabled]="SelectedProgram" >
+                <option value="n" selected> {{DefaultSelectprogram}} </option>
+                <option *ngFor="let obj of _ProgramIDName" value="{{obj.ID}}" >
+                  <h3  > {{obj.Name}} </h3>
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="text-right" style="margin-top: 15px;margin-left: 15px;">
+              <div class="form-group mb-0 mr-0"></div>
+              <a class="btn add-btn" [routerLink]="['/project/createProgram']"> <i data-feather="plus-square">
+                </i>إضافة برنامج
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12">
+      <div class="card" style="margin: 3px ;">
+        <div class="card-body">
+          <div class="tab-content" id="top-tabContent">
+            <div class="tab-pane fade show active" id="top-home" role="tabpanel" aria-labelledby="top-home-tab">
+              <div class="row">
+                <div *ngFor="let item of ProgramListFiltered" class="col-xl-4 col-lg-6 mb-4">
+                  <div class="project-box shadow">
+                    <span class="badge badge-primary badge-color shadow title-style">{{item.ProgramName}}</span>
+                    <h6></h6>
+                    <div class="media Contain-Style mt-4">
+                      <i class="fas fa-layer-group mr-2 pt-1" style="color: darkgrey;"></i>
+                      <div class="media-body">
+                        <p> {{item.ProgramTypeName}} </p>
+                      </div>
+                    </div>
+                    <div class="Category-Img-Title" style="background-image: url({{Url}}{{item.ProgramImg}}); background-size: cover;
+                      height: 260px;">
+                    </div>
+                    <div class="row" style="margin-left: 0px;margin-right: 0px;">
+                      <div class="col-12 description-Style" style=" padding-left: 0px;
+                                                                    padding-right: 0px;
+                                                                    margin-top: 10px;
+                                                                    margin-bottom: 15px;">
+                        <p class="Category-Description p-0"> {{item.ProgramDescription}} </p>
+                      </div>
+                    </div>
+                    <div class="row details " style="margin-left: 0px;margin-right: 5px;">
+                      <div class="col-5"> <span> عنوان التصنيف </span></div>
+                      <div class="col-7" style="color:#eb2067">{{item.CategoryName}}</div>
+                      <div class="col-5"> <span>المحاور </span></div>
+                      <div class="col-7" style="color:#eb2067">{{item.InterviewerName}}</div>
+                      <div class="col-5"> <span>ترتيب البرنامج </span></div>
+                      <div class="col-7" style="color:#eb2067">{{item.ProgramOrder}}</div>
+                      <div class="col-5"><span>ظهور البرنامج </span></div>
+                      <div class="col-5 " style="color:#eb2067" *ngIf="item.ProgramVisible; else elseBlock"> نعم </div>
+                      <ng-template #elseBlock>لا </ng-template>  
+                      <div class="col-5"> <span>تاريخ بداية البرنامج </span></div>
+                      <div class="col-7" style="color:#eb2067">{{item.ProgramStartDate |date:'medium' }}</div>
+                    </div>
+                    <div class="row" style="margin-left: 0px;margin-right: 0px; margin-bottom: 10px;">
+                      <div class="col-12">
+                        <button class="update-btn ml-2 "
+                          (click)="UpdateProgram(
+                            item.ProgramId ,
+                            item.ProgramDescription ,
+                            item.ProgramName ,
+                            item.CategoryName ,
+                            item.InterviewerName ,
+                            item.ProgramTypeName ,
+                            item.ProgramImg ,
+                            item.CategoryId ,
+                            item.ProgramStartDate, 
+                            item.InterviewerId, 
+                            item.ProgramOrder, 
+                            item.ProgramTypeId, 
+                            item.ProgramVisible,
+                            item.Hour , 
+                            item.Minute , 
+                            item.Date ,
+                            item.ProgramPromoUrl )">
+                          تعديل
+                        </button>
+                        <button class="delete-btn mr-2"
+                          (click)="openDialog(item.ProgramName,item.ProgramId)">
+                          حذف
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Container-fluid Ends-->

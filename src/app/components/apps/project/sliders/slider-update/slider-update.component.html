@@ -1,0 +1,140 @@
+<app-breadcrumb [title]="'تعديل عارض الصور'" [items]="['Apps', 'Project']" [active_item]="'Create New'"></app-breadcrumb>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+<div class="row">
+    <div class="col-sm-12">
+    <div class="card">
+        <div class="card-body">
+        <form class="form theme-form" [formGroup]="RegisterForm" >
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                    <label class="lbl-size"> العنوان  </label>
+                    <input class="form-control"
+                        formControlName="SliderTitle"
+                        type="text" 
+                        placeholder="إضافة عنوان  *" 
+                        #ProgramTypeTitleRef 
+                        [(ngModel)]="SliderTitle" > 
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <label class="lbl-size"> إختر حلقة من القائمة</label>
+                        <select (change)="selectChangeHandlerEpisode($event)"
+                            class="form-select form-control HeightList" aria-label="Default select example"
+                            formControlName="EpisodeId" #EpisodeNameRef>
+
+                            <option value="" selected> {{DefaultSelectepisode}} </option>
+                            <option *ngFor="let obj of _EpisodeIDName" value="{{ obj.ID }}">
+                                <h3 class="selected-value"> {{ obj.Name }} </h3>
+                            </option>
+
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                    <label>صورة  السلايدر للموبايل</label>
+                    <form class="dropzone digits" 
+                        id="singleFileUpload" 
+                        [formGroup]="RegisterForm">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="dz-message needsclick">
+                                    <i class="icon-cloud-up"></i>
+                                    <input type='file' 
+                                        formControlName ="SliderImagePath"
+                                        #file   
+                                        accept="image/*" 
+                                        id="getFile" 
+                                        style="display:none" 
+                                        (change)="preview(file.files)" >
+
+                                    <button class="btnFile-style" 
+                                            onclick="document.getElementById('getFile').click()">
+                                            أختر صورة 
+                                    </button>
+                                <!-- <h6> click to upload.</h6> --> 
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <img [src]="imgURL" class="image-input-file"  *ngIf="imgURL">
+                            </div>
+                            <div class="col-4"  >
+                                <img [src]="SliderImagePath" class="image-input-file" *ngIf="!imgURL && SliderImagePath" >
+                            </div>
+                        </div>    
+                    </form>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                    <label>صورة السلايدر للويب </label>
+                    <form class="dropzone digits" 
+                        id="singleFileUpload" 
+                        [formGroup]="RegisterForm">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="dz-message needsclick">
+                                    <i class="icon-cloud-up"></i>
+                                    <input type='file' 
+                                        formControlName ="ImageForWeb"
+                                        #file1   
+                                        accept="image/*" 
+                                        id="getFile1" 
+                                        style="display:none" 
+                                        (change)="preview2(file1.files)" >
+
+                                    <button class="btnFile-style" 
+                                            onclick="document.getElementById('getFile1').click()">
+                                            أختر صورة 
+                                    </button>
+                                <!-- <h6> click to upload.</h6> --> 
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <img [src]="imgURL2" class="image-input-file"  *ngIf="imgURL2">
+                            </div>
+                            <div class="col-4"  >
+                                <img [src]="ImageForWeb" class="image-input-file" *ngIf="!imgURL2 && ImageForWeb" >
+                            </div>
+                        </div>    
+                    </form>
+                    </div>
+                </div>
+            </div>
+          
+            <div class="row">
+                <div class="col d-flex justify-content-end ">
+                    <div class="form-group mb-0">
+                    <!-- <button class="btn btn-success mr-3 Add-style" 
+                        (click)="InsertProgramType()"
+                        [disabled]="RegisterForm.invalid"
+                        [hidden]="FlagUpdate" >
+                        إضافة
+                    </button> -->
+                    <button class="btn btn-primary mr-3 Add-style" 
+                        (click)="UpdateProgramType()"
+                        [hidden]="!FlagUpdate" >
+                        تعديل
+                    </button>
+                    <a class="btn btn-danger" (click)="CancelOperation()" >إلغاء</a>
+                </div>
+            </div>
+            </div>
+        </form>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+<!-- Container-fluid Ends-->
+
+<!-- [disabled]="RegisterForm.invalid" -->

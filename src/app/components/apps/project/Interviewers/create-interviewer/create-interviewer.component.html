@@ -1,0 +1,243 @@
+<app-breadcrumb [title]="'إضافة مقدم برامج جديد'" [items]="['Apps', 'Project']" [active_item]="'Create New'"></app-breadcrumb>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+<div class="row">
+    <div class="col-sm-12">
+    <div class="card">
+        <div class="card-body">
+        <form class="form theme-form" [formGroup]="RegisterForm" >
+
+            <div class="row">
+                <!-- Program Name -->
+                <div class="col">
+                    <div class="form-group">
+                    <label class="lbl-size"> أسم المذيع </label>
+                    <input class="form-control"
+                        formControlName="InterviewerName"
+                        type="text" 
+                        placeholder="أضف أسم المذيع *" 
+                        #InterviewerNameRef 
+                        [(ngModel)]="InterviewerName" > 
+                    </div>
+                </div>
+            </div>   
+
+            <div class="row">
+                 <!-- Program Promo Url  -->
+                 <div class="col-sm-12">
+                    <div class="form-group">
+                    <label class="lbl-size"> عنوان فيس بوك </label>
+                    <input class="form-control"
+                        formControlName="FacebookUrl"
+                        type="text" 
+                        placeholder="أضف رابط فيس بوك *" 
+                        #FacebookUrlRef 
+                        [(ngModel)]="FacebookUrl" > 
+                    </div>
+                </div>
+                <!-- Program Promo Url  -->
+                <div class="col-sm-12">
+                    <div class="form-group">
+                    <label class="lbl-size"> عنوان إنستجرام  </label>
+                    <input class="form-control"
+                        formControlName="InstgramUrl"
+                        type="text" 
+                        placeholder="أضف رابط  إنستجرام *" 
+                        #InstgramUrlRef 
+                        [(ngModel)]="InstgramUrl" > 
+                    </div>
+                </div>
+                  <!-- Program Promo Url  -->
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                    <label class="lbl-size"> عنوان  تويتر </label>
+                    <input class="form-control"
+                        formControlName="TwitterUrl"
+                        type="text" 
+                        placeholder="أضف رابط  تويتر *" 
+                        #TwitterUrlRef 
+                        [(ngModel)]="TwitterUrl" > 
+                    </div>
+                </div>
+                  <!-- Program Promo Url  -->
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                    <label class="lbl-size"> عنوان  يوتيوب </label>
+                    <input class="form-control"
+                        formControlName="YoutubeUrl"
+                        type="text" 
+                        placeholder="أضف رابط  يوتيوب *" 
+                        #YoutubeUrlRef 
+                        [(ngModel)]="YoutubeUrl" > 
+                    </div>
+                </div>
+                    <!-- Program Promo Url  -->
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                    <label class="lbl-size"> عنوان  لينكيد إن </label>
+                    <input class="form-control"
+                        formControlName="LinkedInUrl"
+                        type="text" 
+                        placeholder="أضف  لينكيد إن   *" 
+                        #LinkedInUrlRef 
+                        [(ngModel)]="LinkedInUrl" > 
+                    </div>
+                </div>
+                    <!-- Program Promo Url  -->
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                    <label class="lbl-size"> عنوان  الموقع </label>
+                    <input class="form-control"
+                        formControlName="WebsiteUrl"
+                        type="text" 
+                        placeholder="أضف رابط  موقعك *" 
+                        #WebsiteUrlRef 
+                        [(ngModel)]="WebsiteUrl" > 
+                    </div>
+                </div>
+                  <!-- Program Promo Url  -->
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                    <label class="lbl-size"> عنوان  تيك توك </label>
+                    <input class="form-control"
+                        formControlName="TiktokUrl"
+                        type="text" 
+                        placeholder="أضف رابط  تيك توك *" 
+                        #TiktokUrlRef 
+                        [(ngModel)]="TiktokUrl" > 
+                    </div>
+                </div>
+            </div>
+                            
+           <!-- Program Description  -->
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                        <label class="lbl-size">وصف المذيع</label>
+                            <textarea class="form-control" formControlName="InterviewerDescription"
+                            id="exampleFormControlTextarea4" rows="3" #InterviewerDescriptionRef
+                            placeholder=" أكتب وصف التصنيف " [(ngModel)]="InterviewerDescription" ></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <label class="lbl-size">تاريخ ميلاد المذيع </label>
+                    <input  type="text" 
+                    (change)="SetDate($event)"
+                    placeholder="{{Date}}" 
+                    formControlName="BirthDate"
+                    class="form-control"
+                    onfocus="(this.type='date')"
+                    [(ngModel)]="Date" >
+                </div>
+            </div><br>
+
+                      
+
+            <!-- Interviewer Picture -->
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                    <label class="lbl-size">صورة المذيع</label>
+                    <form class="dropzone digits" 
+                        id="singleFileUpload" 
+                        [formGroup]="RegisterForm">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="dz-message needsclick">
+                                    <i class="icon-cloud-up"></i>
+                                    <input type='file' 
+                                        formControlName ="InterviewerPicture"
+                                        #file   
+                                        accept="image/*" 
+                                        id="getFile" 
+                                        style="display:none" 
+                                        (change)="preview(file.files)" >
+
+                                    <button class="btnFile-style" 
+                                            onclick="document.getElementById('getFile').click()">
+                                            أختر صورة المذيع
+                                    </button>
+                                <!-- <h6> click to upload.</h6> --> 
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <img [src]="imgURL" class="image-input-file"  *ngIf="imgURL">
+                            </div>
+                            <div class="col-4"  >
+                                <img [src]="InterviewerPicture" class="image-input-file" *ngIf="!imgURL && InterviewerPicture " >
+                            </div>
+                        </div>    
+                    </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interviewer Cover  -->
+            <div class="row">
+                <div class="col">
+                    <div class="form-group">
+                    <label class="lbl-size">صورة غلاف المذيع</label>
+                    <form class="dropzone digits" 
+                        id="singleFileUpload" 
+                        [formGroup]="RegisterForm">
+                        <div class="row">
+                            <div class="col-4">
+                                <div class="dz-message needsclick">
+                                    <i class="icon-cloud-up"></i>
+                                    <input type='file' 
+                                        formControlName ="InterviewerCover"
+                                        #file2   
+                                        accept="image/*" 
+                                        id="getFile2" 
+                                        style="display:none" 
+                                        (change)="preview2(file2.files)" >
+
+                                    <button class="btnFile-style" 
+                                            onclick="document.getElementById('getFile2').click()">
+                                            أختر صورة الغلاف
+                                    </button>
+                                <!-- <h6> click to upload.</h6> --> 
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <img [src]="imgURL2" class="image-input-file"  *ngIf="imgURL2">
+                            </div>
+                            <div class="col-4"  >
+                                <img [src]="InterviewerCover" class="image-input-file" *ngIf="!imgURL2 && InterviewerCover " >
+                            </div>
+                        </div>    
+                    </form>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col d-flex justify-content-end ">
+                    <div class="form-group mb-0">
+                    <button class="btn btn-success mr-3 Add-style" 
+                        (click)="CreateInterviewer()"
+                        [disabled]="RegisterForm.invalid"
+                        [hidden]="FlagUpdate" >
+                        إضافة
+                    </button>
+                    <button class="btn btn-primary mr-3 Add-style" 
+                        (click)="UpdateInterviewer()"
+                        [hidden]="!FlagUpdate" >
+                        تعديل
+                    </button>
+                    <a class="btn btn-danger" (click)="CancelOperation()" >إلغاء</a>
+                </div>
+            </div>
+            </div>
+
+        </form>
+        </div>
+    </div>
+    </div>
+</div>
+</div>
+<!-- Container-fluid Ends-->
+
+<!-- [disabled]="RegisterForm.invalid" -->

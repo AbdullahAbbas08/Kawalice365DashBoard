@@ -1,0 +1,150 @@
+<app-breadcrumb [title]="'إرسال تنبيه  '" [items]="['Apps', 'Project']" [active_item]="'Create New'"></app-breadcrumb>
+<!-- Container-fluid starts-->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <form class="form theme-form" [formGroup]="RegisterForm">
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="lbl-size"> عنوان التنبيه </label>
+                                    <input class="form-control" formControlName="title" type="text"
+                                        placeholder="أضف عنوان  التنبيه *" #TitleRef [(ngModel)]="title">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label class="lbl-size"> إختر تصنيف من القائمة</label>
+                                    <select (change)="selectChangeHandlerCategory($event)"
+                                        class="form-select form-control HeightList" aria-label="Default select example"
+                                        formControlName="CategoryID" #CategoryIDRef>
+
+                                        <option value="" selected> {{DefaultSelectcategory}} </option>
+                                        <option *ngFor="let obj of _categoryIDName" value="{{ obj.ID }}">
+                                            <h3 class="selected-value"> {{ obj.Name }} </h3>
+                                        </option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label class="lbl-size"> إختر برنامج من القائمة</label>
+                                    <select (change)="selectChangeHandlerProgram($event)"
+                                        class="form-select form-control HeightList" aria-label="Default select example"
+                                        formControlName="ProgramID" #ProgramIDRef>
+
+                                        <option value="" selected> {{DefaultSelectprogram}} </option>
+                                        <option *ngFor="let obj of _ProgramIDName" value="{{ obj.ID }}">
+                                            <h3 class="selected-value"> {{ obj.Name }} </h3>
+                                        </option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label class="lbl-size"> إختر موسم من القائمة</label>
+                                    <select (change)="selectChangeHandlerSeason($event)"
+                                        class="form-select form-control HeightList" aria-label="Default select example"
+                                        formControlName="SeasonID" #SeasonIDRef>
+
+                                        <option value="" selected> {{DefaultSelectseason}} </option>
+                                        <option *ngFor="let obj of _SeasonIDName" value="{{ obj.ID }}">
+                                            <h3 class="selected-value"> {{ obj.Name }} </h3>
+                                        </option>
+
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label class="lbl-size"> إختر حلقة من القائمة</label>
+                                    <select (change)="selectChangeHandlerEpisode($event)"
+                                        class="form-select form-control HeightList" aria-label="Default select example"
+                                        formControlName="EpisodeName" #EpisodeNameRef>
+
+                                        <option value="" selected> {{DefaultSelectepisode}} </option>
+                                        <option *ngFor="let obj of _EpisodeIDName" value="{{ obj.ID }}">
+                                            <h3 class="selected-value"> {{ obj.Name }} </h3>
+                                        </option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label class="lbl-size"> محتوى التنبيه </label>
+                                    <input class="form-control" formControlName="Descriptions" type="text"
+                                        placeholder="أضف محتوى التنبيه *" #DescriptionsRef [(ngModel)]="Descriptions">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label> صورة التنبيه   </label>
+                                    <form class="dropzone digits" id="singleFileUpload" [formGroup]="RegisterForm">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="dz-message needsclick">
+                                                    <i class="icon-cloud-up"></i>
+                                                    <input type='file' formControlName="IMG" #file
+                                                        accept="image/*" id="getFile" style="display:none"
+                                                        (change)="preview(file.files)">
+
+                                                    <button class="btnFile-style"
+                                                        onclick="document.getElementById('getFile').click()">
+                                                        أختر صورة التنبيه 
+                                                    </button>
+                                                    <!-- <h6> click to upload.</h6> -->
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <img [src]="imgURL" class="image-input-file" *ngIf="imgURL">
+                                            </div>
+                                            <div class="col-4">
+                                                <img [src]="IMG" class="image-input-file"
+                                                    *ngIf="!imgURL && IMG ">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actions Buttons  -->
+                        <div class="row">
+                            <div class="col d-flex justify-content-end ">
+                                <div class="form-group mb-0">
+                                    <button class="btn btn-success mr-3 Add-style" (click)="InsertNotification()"
+                                        [disabled]="RegisterForm.invalid" [hidden]="FlagUpdate">
+                                        إرسال
+                                    </button>
+                                    <!-- <button class="btn btn-primary mr-3 Add-style" (click)="UpdatePlacement()"
+                                        [hidden]="!FlagUpdate">
+                                        تعديل
+                                    </button> -->
+                                    <!-- <a class="btn btn-danger" (click)="CancelOperation()">إلغاء</a> -->
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Container-fluid Ends-->
+
+<!-- [disabled]="RegisterForm.invalid" -->
